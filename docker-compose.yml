@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+  database:
+    image: mysql:alpine
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dbadmin1
+      MYSQL_DATABASE: store
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbadmin1
+    volumes:
+      /home/dbuser/mysqldata:/var/lib/mysql
+    ports:
+      - 3306:3306
